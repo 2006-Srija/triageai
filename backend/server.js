@@ -13,6 +13,11 @@ import { startKeepAlive } from './keepAlive.js';
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+// Render's load balancer runs the app behind a proxy, so trust its
+// X-Forwarded-For header. Without this, express-rate-limit sees every
+// request as coming from Render's IP and rate-limits all users together.
+app.set('trust proxy', 1);
+
 // Security middleware
 app.use(helmet());
 app.use(cors({
