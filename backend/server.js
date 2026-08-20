@@ -8,6 +8,7 @@ import authRoutes from './routes/auth.js';
 import ticketRoutes from './routes/tickets.js';
 import analyticsRoutes from './routes/analytics.js';
 import settingsRoutes from './routes/settings.js';
+import { startKeepAlive } from './keepAlive.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -54,4 +55,5 @@ app.use((err, _req, res, _next) => {
 
 app.listen(PORT, () => {
   console.log(`TriageAI backend running on port ${PORT}`);
+  startKeepAlive();
 });
